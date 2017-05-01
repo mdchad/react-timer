@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 import './index.css';
 
 
 class App extends Component {
     constructor(){
-        super()
+        super();
         this.state = {
             time: '',
             goal: [],
@@ -21,21 +21,21 @@ class App extends Component {
     }
 
     handleChange = (e) => {
-        var numberChange = parseInt(event.target.value, 0)
-        this.setState({time: numberChange})
+        let numberChange = parseInt(event.target.value, 0);
+        this.setState({time: numberChange});
         e.preventDefault();
-    }
+    };
 
     handleSubmit = (e) => {
-        this.setState({submitted: true})
+        this.setState({submitted: true});
         e.preventDefault();
-    }
+    };
 
     handleInput = (e) => {
         this.setState({
             goal: [e.target.value]
         })
-    }
+    };
 
     clear = () => {
         this.setState({
@@ -43,14 +43,14 @@ class App extends Component {
             goal: [],
             submitted: false
         })
-    }
+    };
 
     start = () => {
-        var duration = this.state.time*1000
+        let duration = this.state.time*1000;
         window.setTimeout(() => {
             alert('Time is up. Time to set another goal');
         }, duration);
-    }
+    };
 
 
     render() {
@@ -98,6 +98,6 @@ const Goals = (props) => {
             <p>Duration: {props.time}</p>
         </div>
     )
-}
+};
 
 render(<App />, document.getElementById('root'));
