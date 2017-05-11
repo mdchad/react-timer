@@ -52,7 +52,6 @@ class App extends Component {
         }, duration);
     };
 
-
     render() {
         return (
             <div>
@@ -89,13 +88,13 @@ class App extends Component {
     }
 }
 
-const Goals = (props) => {
+const Goals = ({time, goal}) => {
     return (
         <div className="target">
-            {props.goal.map((goal, index) =>
-                <p key={goal.index}>Current target: {goal}</p>
+            {goal.map(({goal: {index}}) =>
+                <p key={index}>Current target: {goal}</p>
             )}
-            <p>Duration: {props.time}</p>
+            <p>Duration: {time}</p>
         </div>
     )
 };
