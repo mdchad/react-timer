@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {render} from 'react-dom';
 import './index.css';
 
@@ -76,10 +76,7 @@ class App extends Component {
               onChange={ this.handleInput }/>
           </label>
           <br />
-          <button
-            className="inputSubmit"
-            type="submit">Submit
-          </button>
+          <button className="inputSubmit" type="submit">Submit</button>
         </form>
         {submitted && <Goals { ...this.state } />}
         {submitted && <button onClick={ this.clear }>Clear</button>}
