@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 
 
@@ -32,9 +32,7 @@ class App extends Component {
   };
 
   handleInput = (e) => {
-    this.setState({
-      goal: [e.target.value]
-    })
+    this.setState({goal: [e.target.value]})
   };
 
   clear = () => {
@@ -89,8 +87,8 @@ class App extends Component {
 const Goals = ({time, goal}) => {
   return (
     <div className="target">
-      { goal.map(goal =>
-        <p key={ goal.index }>Current target: { goal }</p>
+      { goal.map((goal, index) =>
+        <p key={ index }>Current target: { goal }</p>
       )}
       <p>Duration: { time }</p>
     </div>
