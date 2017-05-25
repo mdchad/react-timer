@@ -21,14 +21,14 @@ class App extends Component {
   }
 
   handleChange = (e) => {
+    e.preventDefault();
     let numberChange = parseInt(e.target.value, 0);
     this.setState({time: numberChange});
-    e.preventDefault();
   };
 
   handleSubmit = (e) => {
-    this.setState({submitted: true});
     e.preventDefault();
+    this.setState(prevState => ({submitted: !prevState.submitted}));
   };
 
   handleInput = (e) => {
@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   start = () => {
-    let duration = this.state.time * 1000;
+    let duration = (this.state.time * 1000) * 60;
     window.setTimeout(() => {
       alert('Time is up. Time to set another goal');
     }, duration);
@@ -55,18 +55,16 @@ class App extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Time:
+          <label> Time:
             <input
               className='textField time'
               type="number"
               value={ time }
               onChange={ this.handleChange }
-              placeholder="time is in seconds"/>
+              placeholder="time is in mins"/>
           </label>
           <br />
-          <label>
-            Target:
+          <label> Target:
             <input
               className='textField'
               type="text"
@@ -84,13 +82,14 @@ class App extends Component {
   }
 }
 
+//Parameters were passed from <Goals { ...this.state } />
 const Goals = ({time, goal}) => {
   return (
     <div className="target">
       { goal.map((goal, index) =>
         <p key={ index }>Current target: { goal }</p>
       )}
-      <p>Duration: { time }</p>
+      <p>Duration: { time } mins</p>
     </div>
   )
 };
