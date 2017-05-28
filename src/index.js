@@ -4,20 +4,22 @@ import './index.css';
 
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       time: '',
       goal: [],
       submitted: false
-    }
+    };
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleInput = this.handleInput.bind(this);
     // this.clear = this.clear.bind(this)
     // this.start = this.start.bind(this)
 
-    /* a better way to bind this using arrow function as demonstrated below */
+    /* a better way to bind this using arrow function as demonstrated below
+    *  using property initializer
+    *  */
   }
 
   handleChange = (e) => {
@@ -41,14 +43,24 @@ class App extends Component {
       goal: [],
       submitted: false
     })
+    clearInterval(this.timer)
+    clearTimeout(this.timeout)
   };
 
   start = () => {
-    let duration = (this.state.time * 1000) * 60;
-    window.setTimeout(() => {
+    let duration = (this.state.time * 1000);
+    this.timer = setInterval(() => {
+      if (this.state.time > 0) { this.tick() }
+		}, 1000);
+
+    this.timeout = window.setTimeout(() => {
       alert('Time is up. Time to set another goal');
     }, duration);
   };
+
+  tick = () => {
+    this.setState({time: --this.state.time})
+  }
 
   render() {
     const { time, goal, submitted } = this.state;
@@ -61,7 +73,8 @@ class App extends Component {
               type="number"
               value={ time }
               onChange={ this.handleChange }
-              placeholder="time is in mins"/>
+              placeholder="time is in seconds"
+              required/>
           </label>
           <br />
           <label> Target:
@@ -69,7 +82,8 @@ class App extends Component {
               className='textField'
               type="text"
               value={ goal }
-              onChange={ this.handleInput }/>
+              onChange={ this.handleInput }
+              required/>
           </label>
           <br />
           <button className="inputSubmit" type="submit">Submit</button>
@@ -89,7 +103,7 @@ const Goals = ({time, goal}) => {
       { goal.map((goal, index) =>
         <p key={ index }>Current target: { goal }</p>
       )}
-      <p>Duration: { time } mins</p>
+      <p>Duration: { time } seconds</p>
     </div>
   )
 };
