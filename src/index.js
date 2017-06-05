@@ -42,9 +42,9 @@ class App extends Component {
       time: '',
       goal: [],
       submitted: false
-    })
-    clearInterval(this.timer)
-    clearTimeout(this.timeout)
+    });
+    clearInterval(this.timer);
+    clearTimeout(this.timeout);
   };
 
   start = () => {
@@ -60,7 +60,7 @@ class App extends Component {
 
   tick = () => {
     this.setState({time: --this.state.time})
-  }
+  };
 
   render() {
     const { time, goal, submitted } = this.state;
@@ -100,9 +100,12 @@ class App extends Component {
 const Goals = ({time, goal}) => {
   return (
     <div className="target">
-      { goal.map((goal, index) =>
-        <p key={ index }>Current target: { goal }</p>
-      )}
+      {
+        goal
+          .map((goal, index) =>
+            <p key={ index }>Current target: { goal }</p>
+          )
+      }
       <p>Duration: { time } seconds</p>
     </div>
   )
