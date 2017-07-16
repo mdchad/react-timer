@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import Form from './Form'
+import Goals from './Goals'
 import './index.css';
 
+const { whyDidYouUpdate } = require('why-did-you-update')
+whyDidYouUpdate(React)
 
 class App extends Component {
   constructor(props) {
@@ -66,28 +70,11 @@ class App extends Component {
     const { time, goal, submitted } = this.state;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label> Time:
-            <input
-              className='textField time'
-              type="number"
-              value={ time }
-              onChange={ this.handleChange }
-              placeholder="time is in seconds"
-              required/>
-          </label>
-          <br />
-          <label> Target:
-            <input
-              className='textField'
-              type="text"
-              value={ goal }
-              onChange={ this.handleInput }
-              required/>
-          </label>
-          <br />
-          <button className="inputSubmit" type="submit">Submit</button>
-        </form>
+          <Form goal={ goal }
+                time={ time }
+                onSubmit={ this.handleSubmit }
+                onChangeTime={ this.handleChange }
+                onChangeGoal={ this.handleInput } />
         {submitted && <Goals { ...this.state } />}
         {submitted && <button onClick={ this.clear }>Clear</button>}
         {submitted && <button onClick={ this.start }>Start</button>}
@@ -95,20 +82,5 @@ class App extends Component {
     )
   }
 }
-
-//Parameters were passed from <Goals { ...this.state } />
-const Goals = ({time, goal}) => {
-  return (
-    <div className="target">
-      {
-        goal
-          .map((goal, index) =>
-            <p key={ index }>Current target: { goal }</p>
-          )
-      }
-      <p>Duration: { time } seconds</p>
-    </div>
-  )
-};
 
 render(<App />, document.getElementById('root'));
