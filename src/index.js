@@ -70,11 +70,11 @@ class App extends Component {
     const { time, goal, submitted } = this.state;
     return (
       <div>
-          <Form goal={ goal }
-                time={ time }
-                onSubmit={ this.handleSubmit }
-                onChangeTime={ this.handleChange }
-                onChangeGoal={ this.handleInput } />
+        <Form goal={ goal }
+              time={ time }
+              onSubmit={ this.handleSubmit }
+              onChangeTime={ this.handleChange }
+              onChangeGoal={ this.handleInput } />
         {submitted && <Goals { ...this.state } />}
         {submitted && <button onClick={ this.clear }>Clear</button>}
         {submitted && <button onClick={ this.start }>Start</button>}

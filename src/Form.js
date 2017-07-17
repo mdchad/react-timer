@@ -4,16 +4,11 @@ import Label from './Label'
 export default class Form extends Component {
 
 	shouldComponentUpdate(nextProps) {
-		if (this.props.time !== nextProps.time) {
-			return true;
+		if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+			return true
+		} else {
+			return false
 		}
-		if (this.props.goal !== nextProps.goal) {
-			return true;
-		}
-		if (this.props.onSubmit !== nextProps.onSubmit) {
-			return true;
-		}
-		return false;
 	}
 
 	onHandleSubmit = (e) => {

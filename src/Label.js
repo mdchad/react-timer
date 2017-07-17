@@ -7,22 +7,11 @@ export default class Form extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if (this.props.value !== nextProps.value) {
-			return true;
+		if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+			return true
+		} else {
+			return false
 		}
-		if (this.props.type !== nextProps.type) {
-			return true;
-		}
-		if (this.props.cssStyle !== nextProps.cssStyle) {
-			return true;
-		}
-		if (this.props.placeholder !== nextProps.placeholder) {
-			return true;
-		}
-		if (this.props.onChangeProps !== nextProps.onChangeProps) {
-			return true;
-		}
-		return false;
 	}
 
 	render() {
